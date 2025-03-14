@@ -3,12 +3,13 @@ using ConsorcioAPI.Services;
 
 namespace ConsorcioAPI.Middlewares;
 
+
 public class AuthMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly TokenService _tokenService;
+    private readonly ITokenService _tokenService;
 
-    public AuthMiddleware(RequestDelegate next, TokenService tokenService)
+    public AuthMiddleware(RequestDelegate next, ITokenService tokenService)
     {
         _next = next;
         _tokenService = tokenService;

@@ -7,7 +7,7 @@ public static class AuthController
 {
     public static RouteGroupBuilder MapAuth(this RouteGroupBuilder group)
     {
-        group.MapPost("/login", async (LoginModel loginData, TokenService tokenService) =>
+        group.MapPost("/login", async (LoginModel loginData, ITokenService tokenService) =>
         {
             if (loginData?.Username == "admin" && loginData?.Password == "password")
             {

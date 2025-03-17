@@ -14,7 +14,6 @@ public class AuthControllerTests
     [Fact]
     public async Task Login_WithValidCredentials_ReturnsOkWithToken()
     {
-        // Arrange
         var mockTokenService = new Mock<ITokenService>();
         mockTokenService.Setup(x => x.GenerateToken("admin"))
             .Returns("test-token");
@@ -25,17 +24,14 @@ public class AuthControllerTests
             Password = "password"
         };
 
-        // Act
         var result = await HandleLogin(loginData, mockTokenService.Object);
 
-        // Assert - NO Assert.IsType calls at all
         Assert.True(result is IResult);
 
         var statusCodeResult = result as IStatusCodeHttpResult;
         Assert.NotNull(statusCodeResult);
         Assert.Equal(200, statusCodeResult.StatusCode);
 
-        // Extract token using reflection and JSON
         var resultType = result.GetType();
         var valueProperty = resultType.GetProperty("Value");
         Assert.NotNull(valueProperty);
@@ -51,7 +47,6 @@ public class AuthControllerTests
     [Fact]
     public async Task Login_WithInvalidCredentials_ReturnsUnauthorized()
     {
-        // Arrange
         var mockTokenService = new Mock<ITokenService>();
         var loginData = new LoginModel
         {
@@ -59,10 +54,8 @@ public class AuthControllerTests
             Password = "ErradoPass"
         };
 
-        // Act
         var result = await HandleLogin(loginData, mockTokenService.Object);
 
-        // Assert - NO casting to specific types
         Assert.True(result is IResult);
         var statusCodeResult = result as IStatusCodeHttpResult;
         Assert.NotNull(statusCodeResult);

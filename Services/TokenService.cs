@@ -5,26 +5,32 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ConsorcioAPI.Services;
 
-public class TokenService
+public class TokenService : ITokenService
 {
+    private readonly byte[] key;
+    private readonly JwtSecurityTokenHandler tokenHandler;
+
+    public TokenService()
+    {
+        var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ?? "minha-chave-secreta-12345";
+        key = Encoding.ASCII.GetBytes(jwtKey);
+        tokenHandler = new JwtSecurityTokenHandler();
+    }
+
     public string GenerateToken(string username)
     {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")!);
-
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[]
+            Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Role, "user")
+                new Claim(ClaimTypes.Name, username)
             }),
-            Expires = DateTime.UtcNow.AddHours(8),
-            Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
-            Audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
+            Expires = DateTime.UtcNow.AddDays(1),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature)
+                SecurityAlgorithms.HmacSha256Signature),
+            Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
+            Audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -33,9 +39,6 @@ public class TokenService
 
     public ClaimsPrincipal? ValidateToken(string token)
     {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")!);
-
         try
         {
             var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters

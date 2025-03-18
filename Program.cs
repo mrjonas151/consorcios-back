@@ -30,6 +30,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader());
 });
 
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -46,7 +47,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddSingleton<TokenService>();
+builder.Services.AddSingleton<ITokenService, TokenService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -110,3 +111,5 @@ app.MapGroup("/cotas").MapCotas();
 app.MapGroup("/clientes").MapCliente();
 
 app.Run();
+
+public partial class Program { }

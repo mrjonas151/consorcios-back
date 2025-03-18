@@ -6,10 +6,10 @@
     }
   },
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost,1433;Database=ConsorcioDB;User Id=sa;Password=JonasP@ssword;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=localhost,PORTA;Database=ConsorcioDB;User Id=sa;Password=SenhaAqui;TrustServerCertificate=True;"
   },
   "Jwt": {
-    "Key": "5072cb2c89b8eed6710aeb9b39b7421cd237f977dd368ef6fa3c2c48914de3ac7c67dc6af427cff0e6128c0993d995653ae050cd4358c322220c7984fe15422d7d4318f723865410e389e566331d22057b8a78ca1989c1ae3b25b1f874b9cd151240afa2eb370e04691fd70c2ffa2ac68fe7a93f830ea8ab1e7c3d94023b09e0",
+    "Key": "JWTKey",
     "Issuer": "ConsorcioAPI",
     "Audience": "ConsorcioAPIUsers"
   },

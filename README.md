@@ -10,6 +10,19 @@ Estas instruções ajudarão você a colocar uma cópia do projeto em funcioname
 
 Certifique-se de que seu ambiente de desenvolvimento esteja configurado corretamente com os seguintes requisitos:
 
+-   **.NET 8 SDK** - Versão 8.0.0 ou superior
+    ```bash
+    dotnet --version
+    ```
+-   **Docker e Docker Compose** - Para execução do SQL Server em container
+
+    ```bash
+    docker --version
+    docker-compose --version
+    ```
+
+    -   **SQL Server** - Versão 2019 ou superior (será executado via Docker)
+
 ### 🔧 Instalação
 
 Siga os passos abaixo para configurar o ambiente de desenvolvimento e rodar a aplicação:

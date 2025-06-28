@@ -126,15 +126,15 @@ O projeto utiliza SQL Server como banco de dados. Certifique-se de ter:
 #### **Clone os repositórios**
 
 ```bash
-git clone https://jonasaquino@bitbucket.org/newm-dev1/jonas-backend.git
+git clone https://github.com/mrjonas151/consorcios-back.git
 ```
 
 ```bash
-git clone https://jonasaquino@bitbucket.org/newm-dev1/jonas-frontend.git
+git clone https://github.com/mrjonas151/consorcios-front.git
 ```
 
 ```bash
-git clone https://jonasaquino@bitbucket.org/newm-dev1/jonas-bff.git
+git clone https://github.com/mrjonas151/consorcios-bff.git
 ```
 
 #### **Configuração do Backend (.NET 8)**
